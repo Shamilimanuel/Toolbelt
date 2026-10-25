@@ -28,8 +28,10 @@ Three looks (Cartridge, Glass, Glass Dark), its own window bar, a tray icon and 
 Windows 10 or 11. Paste this into PowerShell:
 
 ```powershell
-irm https://raw.githubusercontent.com/Shamilimanuel/Toolbelt/main/install.ps1 | iex
+irm shamilimanuel.github.io/toolbelt | iex
 ```
+
+(The long form, straight from this repo: `irm https://raw.githubusercontent.com/Shamilimanuel/Toolbelt/main/install.ps1 | iex`.)
 
 Or download **[ToolbeltSetup.exe](https://github.com/Shamilimanuel/Toolbelt/releases/latest/download/ToolbeltSetup.exe)**
 (11 KB) and run it. It isn't signed (a code-signing certificate costs money every year), so Windows may say
