@@ -2186,10 +2186,32 @@ def selftest(window, api, out_file):
         api.quit()
 
 
+def undo_windows_changes(now=None, nets=netswitch, keys=hotkey, mark=brand):
+    """setup.ps1 -Uninstall runs `main.py --uninstall`: puts back what Toolbelt changed in Windows. Its own folders are
+    the script's job. Returns the lines it prints."""
+    now = now if now is not None else Settings().get()
+    said = []
+    if now.get("calc_key"):
+        mark.calc_key(None)
+        said.append("The Calculator key opens Windows' calculator again.")
+    if now.get("win_t") and keys.set_windows_wint(off=False):
+        said.append("Windows' own Win+%s is back (after signing out or restarting Explorer)." % keys.KEY_LETTER)
+    if nets.installed():
+        r = nets.remove()                                   # one admin prompt, like the setup
+        said.append("Internet switch: " + r["message"])
+    gone = mark.remove_shortcuts()
+    if gone:
+        said.append("Removed: " + ", ".join(gone))
+    return said or ["Nothing in Windows needed putting back."]
+
+
 def main():
     args = sys.argv[1:]
     hidden = "--hidden" in args
     test_file = args[args.index("--selftest") + 1] if "--selftest" in args else None
+    if "--uninstall" in args:
+        print("\n".join(undo_windows_changes()))
+        return
     DATA.mkdir(parents=True, exist_ok=True)
     if "--play" in args:                                    # the taskbar menu: start a game and leave
         game = games.find(args[args.index("--play") + 1])

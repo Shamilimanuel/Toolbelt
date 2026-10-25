@@ -319,6 +319,27 @@ def follow_look(look):
     return changed
 
 
+def remove_shortcuts(appdata=None):
+    """For uninstalling: Toolbelt's Start-menu entries and its pinned taskbar button. Only shortcuts that point at
+    Toolbelt are removed (a Calculator.lnk of another app stays). Returns the names removed."""
+    appdata = Path(appdata or os.environ.get("APPDATA", ""))
+    places = [appdata / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Toolbelt.lnk",
+              appdata / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Calculator.lnk",
+              appdata / "Microsoft" / "Internet Explorer" / "Quick Launch" / "User Pinned" / "TaskBar" / "Toolbelt.lnk"]
+    gone = []
+    for p in places:
+        try:
+            raw = p.read_bytes()
+        except OSError:
+            continue
+        if "main.py".encode("utf-16-le") in raw or b"main.py" in raw or APP_ID.encode("utf-16-le") in raw:
+            p.unlink()
+            gone.append(p.name)
+    if gone:
+        ctypes.windll.shell32.SHChangeNotify(0x08000000, 0x0005, None, None)
+    return gone
+
+
 APPKEY_CALC = 18                                                # Windows' number for the keyboard's Calculator key
 
 

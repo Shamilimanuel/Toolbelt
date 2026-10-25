@@ -68,6 +68,7 @@ run("test_page_colours.py (the Colours screen; codes identical to the prototype'
 run("test_page_home.py (the Home screen, start to finish)", [sys.executable, str(HERE / "test_page_home.py")])
 run("test_page_cutout.py (the Cut out screen, start to finish)", [sys.executable, str(HERE / "test_page_cutout.py")])
 run("test_page_download.py (the Download screen, start to finish)", [sys.executable, str(HERE / "test_page_download.py")])
+run("test_setup.py (the installer: install, update, uninstall in temporary folders; what --uninstall puts back)", [str(VENV), str(HERE / "test_setup.py")])
 
 # the real window, started hidden: every screen opens, a job runs, and nothing listens on a port
 out = Path(tempfile.gettempdir()) / "toolbelt_selftest.json"

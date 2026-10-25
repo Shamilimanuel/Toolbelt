@@ -25,16 +25,25 @@ Three looks (Cartridge, Glass, Glass Dark), its own window bar, a tray icon and 
 
 ## Getting it running
 
-Windows 10 or 11 and [Python](https://www.python.org/) 3.12 or newer.
+Windows 10 or 11. Download the code (**Code → Download ZIP**), unzip it and double-click **`Install.cmd`**.
+
+It installs for your Windows user only, without admin rights:
+1. finds Python 3.12 or newer, and offers to install it with winget if there's none;
+2. copies the app to `%LOCALAPPDATA%\Programs\Toolbelt` (the unzipped folder can go afterwards);
+3. makes Toolbelt's own Python folder in `%LOCALAPPDATA%\Toolbelt\venv` and installs the packages (a few minutes);
+4. adds Toolbelt to **Settings → Apps**, and starts it. On its first start it adds itself to the Start menu.
+
+**Updating:** download the new version and run `Install.cmd` again; your settings and engines stay.
+**Uninstalling:** Settings → Apps → Toolbelt → Uninstall. It puts back what Toolbelt changed in Windows (the
+Calculator key, Win+W, the internet switch, the Start-menu entries) and asks before removing your data.
+
+`Install.cmd` only runs `setup.ps1`, a plain script you can read first. By hand it's:
 
 ```bat
 py -m venv "%LOCALAPPDATA%\Toolbelt\venv"
 "%LOCALAPPDATA%\Toolbelt\venv\Scripts\pip" install -r requirements.txt
 "%LOCALAPPDATA%\Toolbelt\venv\Scripts\pythonw" main.py
 ```
-
-On its first start Toolbelt adds a Start-menu entry, which is the nicest way to open and pin it. `Toolbelt.cmd` starts
-it too.
 
 The heavier tools are installed from inside the app, only when you press Install on the **Engines** screen, into
 `%LOCALAPPDATA%\Toolbelt\engines`:
