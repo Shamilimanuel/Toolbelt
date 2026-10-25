@@ -1,0 +1,10 @@
+# Installed into %LOCALAPPDATA%\Toolbelt\venv (its own Python folder), not the main Python.
+psutil
+pywebview
+# step 3, cut-outs (agreed 13 Oct): runs the BiRefNet model on the graphics card through DirectML
+onnxruntime-directml
+numpy
+pillow
+# step 10, the finishing tools (agreed 15 Oct): QR codes and iPhone (HEIC) photos
+segno
+pillow-heif

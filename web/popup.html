@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolbelt Games</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* The tray pop-up: a small frameless window above the clock. Same looks as the main window, see docs/logo.html. */
+  html, body { background: transparent; }
+  #root { background: var(--panel); display: flex; flex-direction: column; height: 100%; overflow: hidden; border-radius: var(--r); }
+  .look-cartridge #root { box-shadow: inset 0 0 0 2px var(--line); }
+  .look-glass #root { border: 1px solid var(--line); }
+  .ph { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--panel2); border-bottom: 2px solid var(--line); font: 700 12px/1 var(--head); letter-spacing: .04em; }
+  .look-glass .ph { border-bottom-width: 1px; }
+  .ph .sp { flex: 1; }
+  .ph input { width: 130px; background: var(--field); border: 2px solid var(--line); border-radius: var(--pill); padding: 5px 8px; font: 500 12px/1 var(--body); color: var(--ink); outline: none; }
+  .look-glass .ph input { border-width: 1px; }
+  .ph input:focus { border-color: var(--accent); }
+  .filt { display: flex; gap: 4px; padding: 8px 10px 0; flex-wrap: wrap; }
+  .filt .chip { padding: 4px 8px; font-size: 11px; }
+  .filt .chip[aria-pressed="true"] { background: var(--accent2); color: #fff; box-shadow: none; border-color: var(--accent2); }
+  .gl { flex: 1; overflow: auto; display: flex; flex-direction: column; padding: 8px 6px; gap: 2px; }
+  .g { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: var(--r); font-size: 13px; border: 0; background: transparent; color: var(--ink); text-align: left; cursor: pointer; width: 100%; }
+  .g:hover, .g:focus-visible { background: var(--accent2); color: #fff; outline: none; }
+  .g:hover small, .g:focus-visible small { color: rgba(255,255,255,.8); }
+  .g img, .g .tile { width: 24px; height: 24px; border-radius: 4px; flex: none; object-fit: cover; }
+  .g .tile { display: grid; place-items: center; background: var(--panel2); font: 700 11px/1 var(--head); color: var(--ink2); }
+  .g .w { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; flex: 1; }
+  .g .w b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .g .w small { color: var(--ink2); font-size: 11px; }
+  .g .play { font: 700 11px/1 var(--head); background: var(--accent); color: var(--on); padding: 5px 8px; border-radius: var(--pill); visibility: hidden; }
+  .g:hover .play, .g:focus-visible .play { visibility: visible; }
+  .pf { display: flex; gap: 6px; padding: 8px 10px; border-top: 2px solid var(--line); background: var(--panel2); }
+  .look-glass .pf { border-top-width: 1px; }
+  .pf .btn { flex: 1; justify-content: center; }
+  .empty { padding: 18px 12px; color: var(--ink2); font-size: 12.5px; }
+  .pf .net { flex: 0 0 auto; }
+  .pf .net[data-state="off"] { background: var(--bad); color: #fff; border-color: var(--bad); }
+  .pf .net[data-state="nocable"] { color: var(--warn); }
+</style>
+</head>
+<body>
+<div id="root" class="look-cartridge">
+  <div class="ph"><span class="mark" id="mark"></span><span>GAMES</span><span class="sp"></span><input id="q" type="search" placeholder="Search…" aria-label="Search games" autocomplete="off"></div>
+  <div class="filt" id="filt"></div>
+  <div class="gl" id="list"><div class="empty">Looking for your games…</div></div>
+  <div class="pf"><button type="button" class="btn sm" id="lib">Open library</button><button type="button" class="btn sm ghost" id="main">Toolbelt</button><button type="button" class="btn sm ghost net" id="net" data-state="on" title="Internet on / off">🌐 <span id="netTxt">Online</span></button></div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

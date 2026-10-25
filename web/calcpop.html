@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolbelt Calculator</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* The floating mini calculator: a small frameless window that stays on top. Drag it by its header. */
+  html, body { background: transparent; }
+  #root { background: var(--panel); display: flex; flex-direction: column; height: 100%; overflow: hidden; border-radius: var(--r); }
+  .look-cartridge #root { box-shadow: inset 0 0 0 2px var(--line); }
+  .look-glass #root { border: 1px solid var(--line); }
+  .ph { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--t-panel2, var(--panel2)); border-bottom: 2px solid var(--line); font: 700 12px/1 var(--head); letter-spacing: .04em; cursor: move; }
+  .look-glass .ph { border-bottom-width: 1px; }
+  .ph .sp { flex: 1; }
+  .ph .ico { width: 24px; height: 24px; display: grid; place-items: center; border: 0; background: var(--panel); color: var(--ink); cursor: pointer; border-radius: var(--pill); font: 700 12px/1 var(--body); }
+  .body { flex: 1; overflow: auto; padding: 8px; }
+  #body.body { display: block; }   /* not the main window's #body layout (sidebar + page) from style.css: that squeezed the device to 150 px */
+  .casio.compact { padding: 8px; gap: 8px; }
+  .casio.compact .cdisp { min-height: 110px; padding: 6px 10px 8px; }
+  .casio.compact .cnat { font-size: 19px; min-height: 26px; }
+  .casio.compact .medit { font-size: 24px; min-height: 58px; padding: 6px 0; overflow-x: auto; }
+  .casio.compact .cout .big { font-size: 20px; }
+  .casio.compact .ckeys { gap: 4px; }
+  .casio.compact .ckey { padding: 2px 2px 5px; font-size: 13px; }
+  .casio.compact .ckey.fn { font-size: 11px; }
+  .casio.compact .ckey .sh { font-size: 8.5px; }
+</style>
+</head>
+<body>
+<div id="root" class="look-cartridge">
+  <div class="ph pywebview-drag-region"><span class="mark" id="mark"></span><span>CALCULATOR</span><span class="sp"></span><button type="button" class="ico" id="full" title="Open the full calculator">⤢</button><button type="button" class="ico" id="close" title="Hide (it stays ready)">✕</button></div>
+  <div class="body" id="body"></div>
+</div>
+<script src="calcpop.js"></script>
+</body>
+</html>

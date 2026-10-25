@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolbelt App Guard</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* App guard's warning (18 Oct): a small frameless window above the clock, as in docs/appguard.html. */
+  html, body { background: transparent; height: 100%; margin: 0; }
+  #root { background: var(--panel); height: 100%; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r); }
+  .look-cartridge #root { box-shadow: inset 0 0 0 2px var(--line); }
+  .look-glass #root { border: 1px solid var(--line); }
+  .gbar { height: 6px; flex: none; }
+  .gin { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; overflow: auto; }
+  .ghead { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; color: var(--ink2); }
+  .gwho { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: center; }
+  .gwho .ico { width: 40px; height: 40px; display: grid; place-items: center; background: var(--accent); color: var(--on); font: 700 10px/1 var(--head); border-radius: 6px; }
+  .gwho b { font-size: 15px; overflow-wrap: anywhere; display: block; }
+  .gwho small { color: var(--ink2); font: 11.5px/1.35 var(--mono); overflow-wrap: anywhere; display: block; }
+  .verdict { font: 700 12.5px/1.2 var(--head); letter-spacing: .03em; padding: 8px 10px; border-radius: var(--r); }
+  .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: 13px; }
+  .checks li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 8px; }
+  .checks i { font-style: normal; font-weight: 800; }
+  .acts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .acts .btn { justify-content: center; padding: 9px 4px; font-size: 12.5px; }
+  .gnote { font-size: 11.5px; color: var(--ink2); }
+  .gmore { font-size: 12px; color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+<div id="root" class="look-cartridge" role="alertdialog" aria-label="App guard warning">
+  <div class="gbar" id="bar"></div>
+  <div class="gin" id="card"><span class="gnote">Nothing to decide.</span></div>
+</div>
+<script src="guard.js"></script>
+</body>
+</html>

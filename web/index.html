@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolbelt</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="root" class="look-cartridge">
+  <div class="app" id="app">
+    <div class="tb">
+      <span class="logo"><span class="mark" id="mark"><i>T</i></span>TOOLBELT</span>
+      <label class="omni" for="omni">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>
+        <input id="omni" type="text" placeholder="Paste a YouTube link here · drop any video, picture or song anywhere" autocomplete="off" spellcheck="false">
+      </label>
+      <span class="grow"></span>
+      <button type="button" class="tb-btn net" id="netBtn" data-state="on" aria-describedby="netTip">🌐 <span id="netTxt">Online</span><span class="nettip" id="netTip" role="tooltip"><b id="netTipHead">Your internet is on</b><span id="netTipText">Click to switch it off, like pulling the cable. Click again to turn it back on.</span></span></button>
+      <button type="button" class="tb-btn" id="jobsBtn" aria-expanded="false" aria-controls="jobs">Jobs <span class="n" id="jobsN">0</span></button>
+      <div class="winbtns" role="group" aria-label="Window">
+        <button type="button" id="winMin" aria-label="Minimise" title="Minimise"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5h8"/></svg></button>
+        <button type="button" id="winMax" aria-label="Maximise" title="Maximise"><svg viewBox="0 0 10 10" aria-hidden="true"><rect class="one" x="1.5" y="1.5" width="7" height="7"/><path class="two" d="M3 1.5h5.5V7M1.5 3h5.5v5.5H1.5z"/></svg></button>
+        <button type="button" id="winClose" class="close" aria-label="Close" title="Close"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7"/></svg></button>
+      </div>
+    </div>
+    <div class="body">
+      <nav class="side" id="side" aria-label="Screens"></nav>
+      <main id="screen" tabindex="-1"></main>
+      <aside class="jobs" id="jobs" hidden aria-label="Jobs"></aside>
+    </div>
+    <div class="foot" id="foot"></div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
