@@ -51,7 +51,8 @@ with tempfile.TemporaryDirectory(prefix="toolbelt-setup-") as tmp:
         venv_py = data / "venv" / "Scripts" / "python.exe"
         expect("Toolbelt's own Python folder is made", venv_py.exists() and subprocess.run([str(venv_py), "-c", "print(1)"], capture_output=True, text=True).stdout.strip() == "1")
         v = reg_values() or {}
-        expect("it's in Settings > Apps with an Uninstall command", v.get("DisplayName") == "Toolbelt" and "-Uninstall" in v.get("UninstallString", "") and REG in v.get("UninstallString", "")
+        expect("it's in Settings > Apps with an Uninstall command that names its folders", v.get("DisplayName") == "Toolbelt" and "-Uninstall" in v.get("UninstallString", "") and REG in v.get("UninstallString", "")
+               and str(target) in v.get("UninstallString", "") and str(data) in v.get("UninstallString", "")
                and v.get("InstallLocation") == str(target) and Path(v.get("DisplayIcon", "x")).exists())
         expect("its version is read from main.py", v.get("DisplayVersion", "").startswith("1."))
         (data / "settings.json").write_text("{}", encoding="utf-8")

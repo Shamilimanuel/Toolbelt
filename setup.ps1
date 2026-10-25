@@ -116,7 +116,7 @@ function Install-Toolbelt {
     $version = "1.0"
     $m = Select-String -Path (Join-Path $Target "main.py") -Pattern '^VERSION = "([0-9.]+)' | Select-Object -First 1
     if ($m) { $version = $m.Matches[0].Groups[1].Value }
-    $uninstall = "powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $Target 'setup.ps1')`" -Uninstall"
+    $uninstall = "powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $Target 'setup.ps1')`" -Uninstall -Target `"$Target`" -Data `"$Data`""
     if ($RegName -ne "Toolbelt") { $uninstall += " -RegName `"$RegName`"" }
     New-Item -Path $RegKey -Force | Out-Null
     $values = @{ DisplayName = "Toolbelt"; DisplayVersion = $version; Publisher = "Shamilimanuel"; InstallLocation = $Target
