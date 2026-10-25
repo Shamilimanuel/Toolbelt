@@ -31,8 +31,12 @@ Windows 10 or 11. Paste this into PowerShell:
 irm https://raw.githubusercontent.com/Shamilimanuel/Toolbelt/main/install.ps1 | iex
 ```
 
-Or download the code (**Code → Download ZIP**), unzip it and double-click **`Install.cmd`**. Both do the same; the
-one-liner downloads the code for you ([`install.ps1`](install.ps1), short and readable).
+Or download **[ToolbeltSetup.exe](https://github.com/Shamilimanuel/Toolbelt/releases/latest/download/ToolbeltSetup.exe)**
+(11 KB) and run it. It isn't signed (a code-signing certificate costs money every year), so Windows may say
+"Windows protected your PC": **More info → Run anyway**. Its source is [`setup-exe/ToolbeltSetup.cs`](setup-exe/ToolbeltSetup.cs).
+
+Or download the code (**Code → Download ZIP**), unzip it and double-click **`Install.cmd`**. All three do the same:
+the one-liner and the .exe download the code for you ([`install.ps1`](install.ps1), short and readable).
 
 It installs for your Windows user only, without admin rights:
 1. finds Python 3.12 or newer, and offers to install it with winget if there's none;
