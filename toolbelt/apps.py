@@ -143,10 +143,10 @@ def save(data):
     os.replace(tmp, STORE)
 
 
-def projects():
+def projects(root=None):
     data = load()
     out = []
-    for p in find_projects():
+    for p in find_projects(root):
         o = data["overrides"].get(p["id"], {})
         p.update({k: v for k, v in o.items() if k in ("open", "settings") and v})
         p["hidden"] = p["id"] in data["hidden"]

@@ -158,6 +158,24 @@ class Api:
             return {"ok": False, "message": "", "settings": self._settings.get()}
         return self._settings.set("save_to", picked[0])
 
+    def _projects_root(self):
+        """Home's projects folder: his pick (Home > change), else the folder Toolbelt's own folder sits in. Installed in
+        %LOCALAPPDATA%\\Programs that second one has no projects, so the setting matters there (25 Oct)."""
+        chosen = self._settings.get().get("projects_folder", "")
+        return chosen if chosen and Path(chosen).is_dir() else str(apps.ROOT)
+
+    def choose_projects_folder(self):
+        """Home > change: Windows' folder picker for the folder his projects are in."""
+        if self._window is None:
+            return {"ok": False, "message": "The window isn't ready yet."}
+        picked = self._window.create_file_dialog(webview.FOLDER_DIALOG, directory=self._projects_root())
+        if not picked:
+            return {"ok": False, "message": ""}
+        r = self._settings.set("projects_folder", picked[0])
+        if r["ok"]:
+            r["message"] = "Home now reads projects from " + picked[0]
+        return r
+
     # ---------- jobs ----------
     def jobs(self):
         return self._jobs.list()
@@ -611,12 +629,12 @@ class Api:
 
     # ---------- step 4: Home ----------
     def _project(self, app_id):
-        return next((p for p in apps.projects() if p["id"] == app_id), None)
+        return next((p for p in apps.projects(self._projects_root()) if p["id"] == app_id), None)
 
     def home(self):
         """His projects (progress and Next up straight from their notes) and the Windows apps he added, with icons."""
         data = apps.load()
-        projects = apps.projects()
+        projects = apps.projects(self._projects_root())
         for p in projects:
             o = p.get("open") or {}
             if o.get("icon"):                                   # an icon file the project names itself
@@ -638,7 +656,7 @@ class Api:
             entry["icon"] = shellicon.icon(a["target"], 64) if a["kind"] != "url" else ""
             entry["missing"] = a["kind"] != "url" and not Path(a["target"]).exists()
             added.append(entry)
-        return {"projects": projects, "added": added, "vscode": bool(apps.vscode()), "root": str(apps.ROOT)}
+        return {"projects": projects, "added": added, "vscode": bool(apps.vscode()), "root": self._projects_root()}
 
     def home_open(self, app_id):
         p = self._project(app_id)

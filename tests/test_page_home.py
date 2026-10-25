@@ -44,6 +44,7 @@ FAKE = r"""
     set_setting: (k, v) => { settings[k] = v; return ok({ok: true, settings}); },
     engines: () => ok({engines: [], total: 0, folder: 'x'}), jobs: () => ok([]), clipboard_offer: () => ok(null),
     home: () => ok({projects, added, vscode: true, root: 'C:\\VSC'}),
+    choose_projects_folder: () => { window.__calls.push(['choose_root']); return ok({ok: true, message: 'Home now reads projects from D:\\Code'}); },
     home_open: (id) => { window.__calls.push(['home_open', id]); return ok(id === 'Toolbelt' ? {ok: true, message: "You're already in it."} : {ok: true, message: 'Opening ' + id}); },
     home_settings: (id) => { window.__calls.push(['home_settings', id]); return ok(id === 'Toolbelt' ? {ok: true, message: '', go: 'settings'} : {ok: true, message: 'settings'}); },
     home_folder: call('home_folder'), home_code: call('home_code'), home_notes: call('home_notes'), home_reset: call('home_reset'),
@@ -105,6 +106,10 @@ with sync_playwright() as p:
     pg.click("#homeUnhide")
     pg.wait_for_timeout(500)
     expect("…and it comes back", pg.locator(".appc").count() == 4)
+    expect("Home says which folder its projects come from", "Projects from VSC" in pg.inner_text("main"))
+    pg.click("#homeRoot")
+    pg.wait_for_timeout(300)
+    expect("change asks Python for a folder picker", ["choose_root"] in pg.evaluate("window.__calls"))
 
     # edit mode (25 Oct): wiggle + ✕ on every card, marks are only applied on Done
     calls_before = len(pg.evaluate("window.__calls"))

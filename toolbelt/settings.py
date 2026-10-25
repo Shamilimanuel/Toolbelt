@@ -31,6 +31,7 @@ def defaults():
         "auto_spotify": True,               # MP3s also go to Music\Toolbelt for Spotify
         "send_to": "folder",                # where downloads go: folder (save_to), desktop, library (Videos/Music), spotify or custom
         "custom_folder": "",                # the folder he picked last for "custom"
+        "projects_folder": "",              # where Home looks for projects with a status.md ("" = next to Toolbelt's own folder)
         "calc_key": False,                  # the keyboard's Calculator key opens Toolbelt's mini calculator (a registry entry)
         "win_t": True,                      # Win+T opens / hides Toolbelt (a keyboard hook; his choice 15 Oct)
         "own_bar": True,                    # Toolbelt's own window bar instead of Windows' (his choice 15 Oct)
@@ -57,7 +58,7 @@ def check(key, value):
     if key == "send_to":
         ok = value in SEND_TO
         return (ok, value if ok else "Pick the Toolbelt folder, Desktop, Videos/Music, Spotify or a folder of your own.")
-    if key == "custom_folder":
+    if key in ("custom_folder", "projects_folder"):
         if value == "":
             return (True, "")
         if not isinstance(value, str):

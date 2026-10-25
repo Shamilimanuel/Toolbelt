@@ -3017,7 +3017,8 @@
         '<button type="button" class="lb" data-a="remove">' + ic('x') + 'Remove</button></div></div>');
     });
     var changes = Object.keys(HOME.pend).length;
-    return '<div class="row sb"><div><h2 class="h">Your apps</h2><span class="muted">' + (HOME.edit ? 'Click ✕ on what should go: your own projects are hidden (they can come back), added apps are removed from Home. Nothing gets uninstalled.' : (mine.length + ' of yours · ' + d.added.length + ' added · progress and Next up read from each project\'s notes · right-click an app for more')) + '</span></div>' +
+    return '<div class="row sb"><div><h2 class="h">Your apps</h2><span class="muted">' + (HOME.edit ? 'Click ✕ on what should go: your own projects are hidden (they can come back), added apps are removed from Home. Nothing gets uninstalled.' : (mine.length + ' of yours · ' + d.added.length + ' added · progress and Next up read from each project\'s notes · right-click an app for more')) + '</span>' +
+      (HOME.edit ? '' : '<span class="muted" style="display:block;font-size:12px">Projects from <span title="' + esc(d.root || '') + '">' + esc((d.root || '').split('\\').pop() || 'nowhere yet') + '</span> · <button type="button" class="lb" id="homeRoot" style="display:inline;padding:0;text-decoration:underline">change</button></span>') + '</div>' +
       (HOME.edit ? '<div class="row"><button type="button" class="btn ghost sm" id="homeCancel">Cancel</button><button type="button" class="btn" id="homeDone">' + (changes ? 'Done · ' + changes + ' change' + (changes > 1 ? 's' : '') : 'Done') + '</button></div></div>'
         : '<div class="row"><div class="row" role="group" aria-label="Show">' + [['all', 'All'], ['mine', 'Mine'], ['added', 'Added']].map(function (f) { return '<button type="button" class="chip" data-f="' + f[0] + '" aria-pressed="' + (HOME.filter === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>' +
       '<button type="button" class="btn ghost sm" id="homeRefresh">Refresh</button><button type="button" class="btn ghost sm" id="homeEdit"' + (d.projects.length + d.added.length ? '' : ' disabled') + '>Edit</button><button type="button" class="btn" id="homeAdd">+ Add app</button></div></div>') +
@@ -3038,6 +3039,8 @@
     var un = $('#homeUnhide', m);
     if (un) un.onclick = function () { Promise.all(HOME.data.projects.filter(function (p) { return p.hidden; }).map(function (p) { return api('home_hide', p.id, false); })).then(function () { loadHome(true); }); };
     var ed = $('#homeEdit', m); if (ed) ed.onclick = function () { HOME.edit = true; HOME.pend = {}; HOME.seen = {}; go('home', true); };
+    var rootBtn = $('#homeRoot', m);
+    if (rootBtn) rootBtn.onclick = function () { api('choose_projects_folder').then(function (r) { if (r.message) toast(r.message); if (r.ok) loadHome(true); }).catch(fail); };
     var cancel = $('#homeCancel', m); if (cancel) cancel.onclick = function () { HOME.edit = false; HOME.pend = {}; go('home', true); };
     var done = $('#homeDone', m);
     if (done) done.onclick = function () {
