@@ -1,10 +1,18 @@
 # Toolbelt
 
-One Windows app for the everyday things I'd otherwise use a dozen websites and tools for. Built with Python and a
+**One Windows app for the everyday things you'd otherwise use a dozen websites and tools for.** Built with Python and a
 web page in a [pywebview](https://pywebview.flowrl.com/) window: no web server, no open network ports, and the
 pictures, videos and songs you work on never leave your PC.
 
 Three looks (Cartridge, Glass, Glass Dark), its own window bar, a tray icon and a taskbar menu for your games.
+
+<p align="center">
+  <img src="docs/screenshots/home.png" alt="Toolbelt's Home screen with a card for each of your projects" width="32%">
+  <img src="docs/screenshots/cut-out.png" alt="The Cut out tool removing the background from a picture, with a before and after slider" width="32%">
+  <img src="docs/screenshots/games.png" alt="The Games shelf with full-screen art for the selected game" width="32%">
+</p>
+
+<sub>The screenshots use demo projects and made-up games.</sub>
 
 ## What's in it
 
@@ -86,6 +94,15 @@ python tests\run_all.py -v
 The page tests run in an invisible Chrome through [Playwright](https://playwright.dev/python/); the rest use made-up
 files in temporary folders. Nothing opens a window on your screen.
 
+## Privacy
+
+- **Your files stay on your PC.** Pictures, videos and songs are processed locally and never uploaded.
+- **No account, no tracking.** Toolbelt only goes online when you ask it to (see "Where things are kept" above).
+- **No server and no open ports:** the window is a local page handed to pywebview as text.
+- **Installs for your Windows user only**, without admin rights, and puts back what it changed when you uninstall.
+
 ## Licence
 
 [MIT](LICENSE). The engines keep their own licences (see the table above).
+
+More projects: https://github.com/Shamilimanuel
