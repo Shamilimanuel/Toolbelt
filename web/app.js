@@ -2724,10 +2724,10 @@
 
   // ---------- step 5: Colours (carried over from the approved prototype) ----------
   var COL = { tab: 'grad', loaded: false, saved: [], pal: [], palBase: '#FF5C8A', palMode: 0, hex: '#FFCF3F', cA: '#FFF8E7', cB: '#3A3480',
-    grad: { stops: ['#FF5F6D', '#FFC371'], fmt: 'sk', b: true, i: false, u: false, s: false, k: false, sh: false, shc: '#3A0A2A', sha: 60, text: 'PrimalMines' } };
+    grad: { stops: ['#FF5F6D', '#FFC371'], fmt: 'sk', b: true, i: false, u: false, s: false, k: false, sh: false, shc: '#3A0A2A', sha: 60, text: 'Demo world' } };
   var CTABS = [['grad', 'Gradient text'], ['codes', 'Colour codes'], ['pal', 'Palettes'], ['saved', 'Saved']];
   var PRESETS = [['Sunset', ['#FF5F6D', '#FFC371']], ['Ocean', ['#2AF5FF', '#3D7BFF', '#7B3DFF']], ['Fire', ['#FFE53B', '#FF8C1A', '#FF2525']], ['Toxic', ['#B6FF3B', '#28D17C']],
-    ['Rainbow', ['#FF3B3B', '#FFB13B', '#FFF03B', '#3BFF6B', '#3BB3FF', '#B53BFF']], ['Pastel', ['#FFB3C6', '#C3B3FF', '#B3F0FF']], ['PrimalMines', ['#FFD86B', '#FF8A3D']]];
+    ['Rainbow', ['#FF3B3B', '#FFB13B', '#FFF03B', '#3BFF6B', '#3BB3FF', '#B53BFF']], ['Pastel', ['#FFB3C6', '#C3B3FF', '#B3F0FF']], ['Gold', ['#FFD86B', '#FF8A3D']]];
   T.openColour = function (hx) { COL.hex = hx; COL.tab = 'codes'; go('color'); };
   function hexRgb(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
   function rgbHex(c) { return '#' + c.map(function (v) { return ('0' + Math.max(0, Math.min(255, Math.round(v))).toString(16)).slice(-2); }).join('').toUpperCase(); }
@@ -2770,7 +2770,7 @@
         var h = hexes[i], code = g.fmt === 'amp' ? '&' + h : g.fmt === 'sk' ? '<#' + h + '>' : '&x' + h.slice(1).split('').map(function (d) { return '&' + d; }).join('');
         return code + codes + c;
       }).join('');
-      note = (g.fmt === 'amp' ? 'For EssentialsX and most plugins.' : g.fmt === 'sk' ? 'For Skript, like on PrimalMines.' : 'For old Spigot plugins.') + (g.sh ? ' This format has no custom shadow: switch to MiniMessage or JSON for that.' : '');
+      note = (g.fmt === 'amp' ? 'For EssentialsX and most plugins.' : g.fmt === 'sk' ? 'For Skript, used on Minecraft servers.' : 'For old Spigot plugins.') + (g.sh ? ' This format has no custom shadow: switch to MiniMessage or JSON for that.' : '');
     }
     return { out: out, note: note, hexes: hexes, chars: chars };
   }
@@ -2819,7 +2819,7 @@
           '<div class="row nw"><button type="button" class="btn sm" data-use="' + i + '">Use</button><button type="button" class="ico" data-unsave="' + i + '" aria-label="Delete ' + esc(s.n) + '">✕</button></div></div>';
       }).join('') : '<span class="muted">Nothing saved yet. Press ☆ Save on a gradient.</span>') + '</div>';
     }
-    return '<div class="row sb"><h2 class="h">Colours</h2><span class="muted">for PrimalMines, Discord and themes</span></div>' + colTabs() + body;
+    return '<div class="row sb"><h2 class="h">Colours</h2><span class="muted">for Minecraft, Discord and themes</span></div>' + colTabs() + body;
   };
   var obfTimer = null, rememberTimer = null;
   WIRE.color = function (m) {

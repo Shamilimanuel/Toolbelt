@@ -48,7 +48,7 @@ Or download **[ToolbeltSetup.exe](https://github.com/Shamilimanuel/Toolbelt/rele
 Or download the code (**Code → Download ZIP**), unzip it and double-click **`Install.cmd`**. All three do the same:
 the one-liner and the .exe download the code for you ([`install.ps1`](install.ps1), short and readable).
 
-It installs for your Windows user only, without admin rights:
+It installs for your Windows user only, without admin rights (except the optional Internet switch setup, which asks once):
 1. finds Python 3.12 or newer, and offers to install it with winget if there's none;
 2. copies the app to `%LOCALAPPDATA%\Programs\Toolbelt` (the unzipped folder can go afterwards);
 3. makes Toolbelt's own Python folder in `%LOCALAPPDATA%\Toolbelt\venv` and installs the packages (a few minutes);
@@ -99,7 +99,7 @@ files in temporary folders. Nothing opens a window on your screen.
 - **Your files stay on your PC.** Pictures, videos and songs are processed locally and never uploaded.
 - **No account, no tracking.** Toolbelt only goes online when you ask it to (see "Where things are kept" above).
 - **No server and no open ports:** the window is a local page handed to pywebview as text.
-- **Installs for your Windows user only**, without admin rights, and puts back what it changed when you uninstall.
+- **Installs for your Windows user only**, without admin rights (except the optional Internet switch setup, and removing leftovers that only an administrator may delete; each asks once), and puts back what it changed when you uninstall.
 
 ## Licence
 

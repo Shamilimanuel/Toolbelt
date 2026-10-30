@@ -24,10 +24,10 @@ with tempfile.TemporaryDirectory() as tmp:
     colours.STORE = Path(tmp) / "colours.json"
     try:
         expect("nothing saved at first", colours.load() == {"saved": [], "last": None})
-        r = colours.save_gradient("PrimalMines gold", ["#ffd86b", "#FF8A3D"])
-        expect("a gradient is saved, colours in capitals", r["ok"] and r["saved"][0] == {"n": "PrimalMines gold", "s": ["#FFD86B", "#FF8A3D"]})
+        r = colours.save_gradient("Demo gold", ["#ffd86b", "#FF8A3D"])
+        expect("a gradient is saved, colours in capitals", r["ok"] and r["saved"][0] == {"n": "Demo gold", "s": ["#FFD86B", "#FF8A3D"]})
         colours.save_gradient("Ocean", ["#2AF5FF", "#3D7BFF", "#7B3DFF"])
-        expect("newest first", [s["n"] for s in colours.load()["saved"]] == ["Ocean", "PrimalMines gold"])
+        expect("newest first", [s["n"] for s in colours.load()["saved"]] == ["Ocean", "Demo gold"])
         colours.save_gradient("Gold again", ["#FFD86B", "#FF8A3D"])
         expect("the same colours saved again replace the old one", [s["n"] for s in colours.load()["saved"]] == ["Gold again", "Ocean"])
         expect("one colour is refused", not colours.save_gradient("x", ["#FFFFFF"])["ok"])

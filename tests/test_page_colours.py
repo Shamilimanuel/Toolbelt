@@ -80,7 +80,7 @@ with sync_playwright() as p:
     pg.wait_for_selector("#grOut")
     pg.fill("#grText", "Hi there")
     pg.wait_for_timeout(100)
-    expect("the screen shows the Skript code by default (for PrimalMines)", pg.input_value("#grOut") == EXPECTED["sk"].replace("ff5f6d", "ff5f6d"))
+    expect("the screen shows the Skript code by default (for Minecraft)", pg.input_value("#grOut") == EXPECTED["sk"].replace("ff5f6d", "ff5f6d"))
     pg.click('[data-preset="4"]')                                  # Rainbow: 6 colours
     expect("a 6-colour preset fills the colours and disables + Add", pg.locator(".stop").count() == 6 and pg.is_disabled("#grAdd"))
     pg.click('[data-st="k"]')
