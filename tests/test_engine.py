@@ -35,6 +35,7 @@ with tempfile.TemporaryDirectory() as tmp:
     s = Settings(tmp)
     expect("defaults: Cartridge look", s.get()["look"] == "cartridge")
     expect("look can change", s.set("look", "glassdark")["ok"] and s.get()["look"] == "glassdark")
+    expect("the Minimal looks are known", s.set("look", "minimal")["ok"] and s.set("look", "minimaldark")["ok"] and s.set("look", "glassdark")["ok"])
     expect("unknown look refused", not s.set("look", "neon")["ok"] and s.get()["look"] == "glassdark")
     expect("accent must be #RRGGBB", not s.set("accent", "red")["ok"] and s.set("accent", "#ffcf3f")["settings"]["accent"] == "#FFCF3F")
     expect("accent can go back to the look's own", s.set("accent", "")["ok"])

@@ -133,7 +133,7 @@ with sync_playwright() as p:
     pg.wait_for_timeout(200)
     expect("Use as gradient carries the palette over", pg.locator(".stop").count() == 3)
 
-    for look in ["glass", "glassdark"]:
+    for look in ["glass", "glassdark", "minimal", "minimaldark"]:
         pg.evaluate("window.toolbelt.go('settings')")
         pg.click('[data-look="%s"]' % look)
         pg.wait_for_timeout(200)

@@ -19,7 +19,7 @@
   }
   function applyLook(settings) {
     st.look = settings.look || 'cartridge';
-    $('#root').className = st.look === 'cartridge' ? 'look-cartridge' : st.look === 'glass' ? 'look-glass' : 'look-glass glass-dark';
+    $('#root').className = ({ cartridge: 'look-cartridge', glass: 'look-glass', glassdark: 'look-glass glass-dark', minimal: 'look-glass look-min', minimaldark: 'look-glass glass-dark look-min' })[st.look] || 'look-glass glass-dark';
     if (settings.accent) $('#root').style.setProperty('--accent', settings.accent); else $('#root').style.removeProperty('--accent');
     if (st.logos[st.look]) $('#mark').innerHTML = st.logos[st.look];
   }

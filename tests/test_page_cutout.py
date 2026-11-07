@@ -141,7 +141,7 @@ with sync_playwright() as p:
     pg.wait_for_timeout(300)
     expect("a dropped non-picture without a path is explained, not opened", "Pick a file" in pg.inner_text("#toast"))
 
-    for look in ["glass", "glassdark"]:
+    for look in ["glass", "glassdark", "minimal", "minimaldark"]:
         pg.evaluate("window.toolbelt.go('settings')")
         pg.click('[data-look="%s"]' % look)
         pg.wait_for_timeout(200)

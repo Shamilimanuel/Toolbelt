@@ -119,7 +119,7 @@ with sync_playwright() as p:
     pg.click("#gOn")
     pg.wait_for_timeout(400)
     expect("the big switch turns it off", calls(pg, "switch") == [["switch", False]] and "App guard is off" in pg.inner_text("main"))
-    for look in ("glass", "glassdark"):
+    for look in ("glass", "glassdark", "minimal", "minimaldark"):
         pg.evaluate("window.pywebview.api.set_setting('look', %r)" % look)
         r = pg.evaluate("window.toolbelt.walkScreens()")
         expect("every screen opens in %s (%d)" % (look, r["count"]), not r["failed"])

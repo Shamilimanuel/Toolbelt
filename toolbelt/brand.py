@@ -1,4 +1,4 @@
-"""Toolbelt's logo: the Cartridge mark he picked on 14 Oct (docs/logo.html, idea 2), in all three looks.
+"""Toolbelt's logo: the Cartridge mark he picked on 14 Oct (docs/logo.html, idea 2), in every look.
 
 One list of rectangles on a 16×16 grid is the single source of truth. From it:
 - `svg()` draws the mark for the page (the title bar shows the one that belongs to the current look),
@@ -17,7 +17,7 @@ from pathlib import Path
 
 APP_ID = "Shamil.Toolbelt"
 ICONS_DIR = Path(__file__).resolve().parents[1] / "web" / "icons"
-LOOKS = ("cartridge", "glass", "glassdark")
+LOOKS = ("cartridge", "glass", "glassdark", "minimal", "minimaldark")
 
 # [x, y, w, h, colour]: body, notch, label, the T (bar + stem), grip stripe
 SHAPES = [[3, 1, 10, 14, "main"], [11, 1, 2, 3, "hole"], [5, 5, 6, 7, "ink"], [6, 6, 4, 1, "main"], [7, 7, 2, 4, "main"], [4, 13, 8, 1, "accent"]]
@@ -26,6 +26,9 @@ PALETTES = {
     "cartridge": {"tile": ("#26225A", "#26225A"), "hole": "#26225A", "bevel": "#4A43A0", "main": "#FFCF3F", "accent": "#FF5C8A", "ink": "#0B0920", "rx": 0.0, "srx": 0.0},
     "glass":     {"tile": ("#2A8FE6", "#0A4E8F"), "hole": "#1468B8", "bevel": "", "main": "#FFFFFF", "accent": "#9EDBFF", "ink": "#083B6B", "rx": 3.6, "srx": 0.8},
     "glassdark": {"tile": ("#3A3F5C", "#1B1E2E"), "hole": "#262A40", "bevel": "", "main": "#60CDFF", "accent": "#FFFFFF", "ink": "#0B1020", "rx": 3.6, "srx": 0.8},
+    # Minimal: one flat colour, no gradient or bevel; the light look gets the dark tile and the other way round, so it stands out on its own bar
+    "minimal":     {"tile": ("#18181B", "#18181B"), "hole": "#18181B", "bevel": "", "main": "#FFFFFF", "accent": "#A1A1AA", "ink": "#18181B", "rx": 3.6, "srx": 0.8},
+    "minimaldark": {"tile": ("#FAFAFA", "#FAFAFA"), "hole": "#FAFAFA", "bevel": "", "main": "#18181B", "accent": "#71717A", "ink": "#FAFAFA", "rx": 3.6, "srx": 0.8},
 }
 
 
@@ -98,7 +101,7 @@ def icon_path(look):
 
 
 def make_icons(folder=ICONS_DIR):
-    """Writes the three .ico files (and a 256 px PNG of each, for shortcuts and docs). Run: python brand.py"""
+    """Writes an .ico file per look (and a 256 px PNG of each, for shortcuts and docs). Run: python brand.py"""
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=True)
     written = []

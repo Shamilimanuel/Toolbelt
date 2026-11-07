@@ -33,7 +33,7 @@ expect("256 px Glass: round corners are see-through, the middle is painted", big
 # ---------- the .ico files ----------
 with tempfile.TemporaryDirectory() as tmp:
     written = brand.make_icons(tmp)
-    expect("three .ico files written", len(written) == 3 and all(p.exists() and p.stat().st_size > 1000 for p in written))
+    expect("an .ico file per look written", len(written) == len(brand.LOOKS) and all(p.exists() and p.stat().st_size > 1000 for p in written))
     with Image.open(written[0]) as ico:
         sizes = ico.info["sizes"]
     expect("an .ico holds 16 to 256 px", (16, 16) in sizes and (256, 256) in sizes)

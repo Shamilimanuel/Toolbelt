@@ -70,7 +70,7 @@ from page import build_page, build_popup, build_calcpop, build_guard
 from settings import DATA, Settings
 
 VERSION = "1.0 (all nine steps: drivers and ping finish PC care)"
-BACKGROUND = {"cartridge": "#26225A", "glass": "#EEF1F8", "glassdark": "#1C1E2A"}
+BACKGROUND = {"cartridge": "#26225A", "glass": "#EEF1F8", "glassdark": "#1C1E2A", "minimal": "#FAFAFA", "minimaldark": "#111113"}
 PYTHONW = Path(sys.executable).with_name("pythonw.exe")
 PYTHONW = PYTHONW if PYTHONW.exists() else Path(sys.executable)
 LAUNCHER = Path(sys.executable).with_name("Toolbelt.exe")       # made by brand.make_launcher on start; shortcuts point at it

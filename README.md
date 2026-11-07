@@ -4,7 +4,7 @@
 web page in a [pywebview](https://pywebview.flowrl.com/) window: no web server, no open network ports, and the
 pictures, videos and songs you work on never leave your PC.
 
-Three looks (Cartridge, Glass, Glass Dark), its own window bar, a tray icon and a taskbar menu for your games.
+Five looks (Cartridge, Glass, Glass Dark, Minimal, Minimal Dark), its own window bar, a tray icon and a taskbar menu for your games.
 
 <p align="center">
   <img src="docs/screenshots/home.png" alt="Toolbelt's Home screen with a card for each of your projects" width="32%">

@@ -63,7 +63,7 @@ run("test_page_net.py (the internet switch's button: set up, off, on, no connect
 run("test_appguard.py (App guard for real on a hidden copy of cmd.exe: notice, checks, stop, quarantine, restore, trust)", [str(VENV), str(HERE / "test_appguard.py")])
 run("test_guardscan.py (App guard scans: the checks, a worm shortcut, Defender on a folder, a new download, a USB stick)", [str(VENV), str(HERE / "test_guardscan.py")])
 run("test_page_guard.py (the App guard screen and its warning window)", [sys.executable, str(HERE / "test_page_guard.py")])
-run("test_page.py (the page, 3 looks, 2 window sizes)", [sys.executable, str(HERE / "test_page.py")])
+run("test_page.py (the page, 5 looks, 2 window sizes)", [sys.executable, str(HERE / "test_page.py")])
 run("test_page_colours.py (the Colours screen; codes identical to the prototype's)", [sys.executable, str(HERE / "test_page_colours.py")])
 run("test_page_home.py (the Home screen, start to finish)", [sys.executable, str(HERE / "test_page_home.py")])
 run("test_page_cutout.py (the Cut out screen, start to finish)", [sys.executable, str(HERE / "test_page_cutout.py")])
