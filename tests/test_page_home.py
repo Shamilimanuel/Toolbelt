@@ -167,7 +167,7 @@ with sync_playwright() as p:
     expect("Remove takes it off Home", "Discord" not in pg.inner_text("main"))
     pg.screenshot(path=str(OUT / "home_added.png"), full_page=True)
 
-    for look in ["glass", "glassdark"]:
+    for look in ["glass", "glassdark", "minimal", "minimaldark"]:
         pg.evaluate("window.toolbelt.go('settings')")
         pg.click('[data-look="%s"]' % look)
         pg.wait_for_timeout(200)

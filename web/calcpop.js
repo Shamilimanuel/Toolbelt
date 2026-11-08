@@ -10,7 +10,7 @@
   var st = window.calcDevice.load(window.calcDevice.fresh());
   function applyLook(settings, logos) {
     var look = settings.look || 'cartridge';
-    $('#root').className = look === 'cartridge' ? 'look-cartridge' : look === 'glass' ? 'look-glass' : 'look-glass glass-dark';
+    $('#root').className = ({ cartridge: 'look-cartridge', glass: 'look-glass', glassdark: 'look-glass glass-dark', minimal: 'look-glass look-min', minimaldark: 'look-glass glass-dark look-min' })[look] || 'look-glass glass-dark';
     if (settings.accent) $('#root').style.setProperty('--accent', settings.accent); else $('#root').style.removeProperty('--accent');
     if (logos && logos[look]) $('#mark').innerHTML = logos[look];
   }

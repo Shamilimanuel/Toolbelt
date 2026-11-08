@@ -133,15 +133,21 @@ with sync_playwright() as p:
             pg.click('[data-set="about"]')
             pg.wait_for_function("document.querySelector('#wintInfo').textContent.indexOf('normal shortcut') !== -1", timeout=4000)
             expect(tag + ": …or that it's a normal shortcut when Windows let go of it", True)
-        for look in ["cartridge", "glass", "glassdark"]:
+        for look in ["cartridge", "glass", "glassdark", "minimal", "minimaldark"]:
             pg.evaluate("window.toolbelt.go('settings')")
             pg.click('[data-set="look"]')
             pg.click('[data-look="%s"]' % look)
             pg.wait_for_timeout(250)
             root = pg.get_attribute("#root", "class")
-            expect(tag + ": look " + look + " applies", ("glass-dark" in root) if look == "glassdark" else (("look-" + look) in root and "glass-dark" not in root))
+            dark = look in ("glassdark", "minimaldark")
+            kind = "look-min" if look.startswith("minimal") else "look-glass" if look.startswith("glass") else "look-cartridge"
+            expect(tag + ": look " + look + " applies", kind in root and ("glass-dark" in root) == dark and (look.startswith("minimal") or "look-min" not in root))
             mark = pg.inner_html("#mark")
-            expect(tag + ": the logo follows the look " + look, ("crispEdges" in mark) if look == "cartridge" else ("tbg-" + look in mark))
+            expect(tag + ": the logo follows the look " + look, ("crispEdges" in mark) if look == "cartridge" else ("tbg-" + look in mark) if look.startswith("glass")
+                   else ('fill="%s"' % brand.PALETTES[look]["tile"][0] in mark and "linearGradient" not in mark))
+            if look.startswith("minimal"):          # flat: Glass's tinted window layer is gone
+                tint = pg.evaluate("getComputedStyle(document.querySelector('.app')).backgroundColor")
+                expect(tag + ": " + look + " has no tinted window", tint in ("rgba(0, 0, 0, 0)", "transparent"))
             for screen in ["home", "engines", "settings", "video"]:
                 pg.evaluate("window.toolbelt.go('%s')" % screen)
                 pg.wait_for_timeout(450)

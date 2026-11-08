@@ -10,7 +10,7 @@ from pathlib import Path
 
 DATA = Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "Toolbelt"
 
-LOOKS = ("cartridge", "glass", "glassdark")
+LOOKS = ("cartridge", "glass", "glassdark", "minimal", "minimaldark")
 SEND_TO = ("folder", "desktop", "library", "spotify", "custom")
 BAD_NAME_CHARS = re.compile(r'[\\/:*?"<>|]')
 

@@ -272,8 +272,8 @@ with sync_playwright() as p:
     pg.click('[data-dsubs="auto"]')
     pg.wait_for_timeout(200)
     expect("Settings: subtitles with videos", ["set", "dl_subs", "auto"] in pg.evaluate("window.__calls"))
-    # every screen still opens, in the three looks
-    for look in ("cartridge", "glass", "glassdark"):
+    # every screen still opens, in every look
+    for look in ("cartridge", "glass", "glassdark", "minimal", "minimaldark"):
         pg.evaluate("window.pywebview.api.set_setting('look', %r)" % look)
         r = pg.evaluate("window.toolbelt.walkScreens()")
         expect("every screen opens in %s (%d)" % (look, r["count"]), not r["failed"])

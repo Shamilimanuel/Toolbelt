@@ -1,4 +1,5 @@
-/* Toolbelt's look. Three looks share one set of parts (decided 13 Oct): Cartridge (default), Glass, Glass Dark.
+/* Toolbelt's look. The looks share one set of parts (decided 13 Oct): Cartridge (default), Glass, Glass Dark; Minimal and
+   Minimal Dark are the Glass parts made flat (see the end of this file).
    Carried over from the approved prototype (docs/prototype.html); the window itself fills the whole screen here. */
 :root {
   --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
@@ -778,3 +779,66 @@ button.tog:hover { color: var(--ink); }
 .look-glass .nettip { border-width: 1px; }
 .tb-btn.net:hover .nettip, .tb-btn.net:focus-visible .nettip { opacity: 1; transform: none; transition-delay: .25s; }
 .tb-btn.net[data-state="off"] .nettip { color: var(--ink); }
+
+/* ---------- Minimal and Minimal Dark: the Glass parts made flat ----------
+   The root carries look-glass too, so every part already has Glass's 1px borders, rounded corners and light/dark rules;
+   this block only takes away what makes Glass heavy: the tinted window, drop shadows, gradients, lifting cards and the
+   extra-bold buttons. One thin line between things and one quiet accent (black on light, white on dark). Floating parts
+   (menus, dialogs, the job drawer, toasts) keep one soft shadow, so they still read as on top. */
+.look-glass.look-min {
+  --bg: #FAFAFA; --panel: #FFFFFF; --panel2: #F4F4F5; --raise: #FFFFFF;
+  --ink: #18181B; --ink2: #63636B; --accent: #18181B; --accent2: #18181B; --on: #FFFFFF; --line: #E4E4E7; --deep: #E4E4E7;
+  --ok: #15803D; --warn: #B45309; --bad: #DC2626; --r: 6px; --pill: 6px;
+  --field: #FFFFFF; --solid: #FFFFFF; --float: 0 8px 24px rgba(0,0,0,.08);
+  color-scheme: light;
+}
+.look-glass.glass-dark.look-min {
+  --bg: #111113; --panel: #18181B; --panel2: #151517; --raise: #232327;
+  --ink: #FAFAFA; --ink2: #A1A1AA; --accent: #FAFAFA; --accent2: #52525B; --on: #18181B; --line: #27272A; --deep: #27272A;
+  --ok: #4ADE80; --warn: #FBBF24; --bad: #F87171;
+  --field: #18181B; --solid: #18181B; --float: 0 8px 24px rgba(0,0,0,.5);
+  color-scheme: dark;
+}
+.look-glass.look-min .app { background: transparent; }
+.look-min .side { border-right: 1px solid var(--line); }
+.look-min .side button:hover { transform: none; background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.look-min .side button[aria-current="page"] { background: color-mix(in srgb, var(--ink) 8%, transparent); color: var(--ink); box-shadow: none; }
+.look-min .lift:hover { transform: none; }
+.look-min .btn { font-weight: 600; }
+.look-min .chip, .look-min .tb-btn, .look-min .lb { font-weight: 600; }
+.look-min .btn:active:not(:disabled) { transform: none; filter: brightness(.94); }
+.look-min .tb-btn .n { background: var(--accent); color: var(--on); }
+.look-min button:focus-visible, .look-min input:focus-visible, .look-min textarea:focus-visible, .look-min select:focus-visible,
+.look-min .ba:focus-within, .look-min .mclip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.look-min .card, .look-min .ckey, .look-min .item { box-shadow: none; }
+.look-min .cmenu, .look-min .dialog, .look-min .jobs, .look-min .toast, .look-min .nettip { box-shadow: var(--float); }
+.look-min .dlart { animation: none; background: var(--panel2); }
+.look-min .tag.hd, .look-min .hdbar i { background: var(--accent); }
+/* Minimal Dark's red is light, so text on it is dark (white on it is hard to read) */
+.look-glass.glass-dark.look-min .btn.danger, .look-glass.glass-dark.look-min .tb-btn.net[data-state="off"], .look-glass.glass-dark.look-min .tag.bad,
+.look-glass.glass-dark.look-min .sti.bad, .look-glass.glass-dark.look-min .pf .net[data-state="off"] { color: #18181B; }
+/* the game library's panels over the art: solid instead of frosted glass */
+.look-min .libtop, .look-min .lib.full .shelf { backdrop-filter: none; background: var(--solid); }
+.look-min .spotinfo, .look-min .artcard { backdrop-filter: none; background: var(--solid) !important; }
+/* the game library's fades: Glass light paints them in its own blue-grey; Minimal fades into its own background */
+.look-glass.look-min:not(.glass-dark) .libbg .shade { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent) 0%, color-mix(in srgb, var(--bg) 80%, transparent) 45%, var(--bg) 100%); }
+.look-glass.look-min:not(.glass-dark) .libbg .shade::after { background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 60%, transparent) 0%, transparent 45%); }
+.look-glass.look-min:not(.glass-dark) .lib.full .libbg .shade { background: linear-gradient(180deg, rgba(255,255,255,.2) 0%, transparent 16%, transparent 46%, color-mix(in srgb, var(--bg) 60%, transparent) 74%, color-mix(in srgb, var(--bg) 94%, transparent) 100%); }
+.look-glass.look-min:not(.glass-dark) .lib.full .libbg .shade::after { background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 55%, transparent) 0%, transparent 50%); }
+/* the calculator: still recognisable keys (number keys lighter, = in the accent, DEL / AC red, SHIFT amber), but flat */
+.look-glass.look-min .casio { --dv-body: var(--panel); --dv-body2: var(--panel); --dv-edge: var(--line); --dv-lcd: var(--panel2); --dv-lcd2: var(--panel2);
+  --dv-lcd-ink: var(--ink); --dv-lcd-dim: var(--ink2); --dv-digit: var(--raise); --dv-digit-ink: var(--ink); --dv-fn: var(--panel2); --dv-fn-ink: var(--ink);
+  --dv-op: var(--panel2); --dv-label: var(--warn); --dv-label-ink: #FFFFFF; --dv-r: 6px;
+  background: var(--panel) !important; box-shadow: none !important; border: 1px solid var(--line) !important; border-radius: var(--r); color: var(--ink); }
+.look-glass.glass-dark.look-min .casio { --dv-digit: #27272A; --dv-label-ink: #18181B; }
+.look-min .casio .cdisp { background: var(--dv-lcd); border: 1px solid var(--line); border-radius: var(--r); box-shadow: none !important; }
+.look-min .casio .cout .err { color: var(--bad); }
+.look-min .casio .ckey { background: var(--dv-fn); color: var(--dv-fn-ink); border: 1px solid var(--line) !important; box-shadow: none !important; font-weight: 600; }
+.look-min .casio .ckey.digit { background: var(--dv-digit); color: var(--dv-digit-ink); box-shadow: none !important; }
+.look-min .casio .ckey.op { background: var(--dv-op); color: var(--ink); }
+.look-min .casio .ckey.warn { background: var(--bad); color: #FFFFFF; border-color: transparent !important; box-shadow: none !important; }
+.look-glass.glass-dark.look-min .casio .ckey.warn { color: #18181B; }
+.look-min .casio .ckey.eq { background: var(--accent); color: var(--on); border-color: transparent !important; box-shadow: none !important; }
+.look-min .casio .ckey.shiftkey { background: var(--dv-label); color: var(--dv-label-ink); border-color: transparent !important; box-shadow: none !important; }
+.look-min .casio .ckey.shifted .sh { text-shadow: none; }
+.look-min .casio .ckey:active { transform: none; filter: brightness(.92); box-shadow: none !important; }

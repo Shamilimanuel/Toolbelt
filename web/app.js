@@ -94,12 +94,13 @@
   function setrow(title, sub, ctl) { return '<div class="setrow"><div><b>' + title + '</b>' + (sub ? '<span class="muted">' + sub + '</span>' : '') + '</div><div class="ctl">' + ctl + '</div></div>'; }
 
   // ---------- looks ----------
-  var ACCENTS = { cartridge: ['#FFCF3F', '#FF5C8A', '#5CE08A', '#5CC8FF', '#B98CFF'], glass: ['#0F6CBD', '#C239B3', '#0F7B3F', '#CA5010', '#5B5FC7'], glassdark: ['#60CDFF', '#FF8FD8', '#6CCB8A', '#FFB46B', '#A9A6FF'] };
+  var ACCENTS = { cartridge: ['#FFCF3F', '#FF5C8A', '#5CE08A', '#5CC8FF', '#B98CFF'], glass: ['#0F6CBD', '#C239B3', '#0F7B3F', '#CA5010', '#5B5FC7'], glassdark: ['#60CDFF', '#FF8FD8', '#6CCB8A', '#FFB46B', '#A9A6FF'],
+    minimal: ['#18181B', '#2563EB', '#15803D', '#C2410C', '#7C3AED'], minimaldark: ['#FAFAFA', '#60A5FA', '#4ADE80', '#FB923C', '#C084FC'] };
   function lum(h) { var c = [1, 3, 5].map(function (i) { var v = parseInt(h.substr(i, 2), 16) / 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; }
   function applyLook() {
     var s = st.settings; if (!s) return;
     var r = $('#root');
-    r.className = (s.look === 'cartridge' ? 'look-cartridge' : s.look === 'glass' ? 'look-glass' : 'look-glass glass-dark') + (s.animations ? '' : ' no-anim');
+    r.className = (({ cartridge: 'look-cartridge', glass: 'look-glass', glassdark: 'look-glass glass-dark', minimal: 'look-glass look-min', minimaldark: 'look-glass glass-dark look-min' })[s.look] || 'look-glass glass-dark') + (s.animations ? '' : ' no-anim');
     if (s.accent) { r.style.setProperty('--accent', s.accent); r.style.setProperty('--on', lum(s.accent) > .45 ? '#1A1626' : '#FFFFFF'); }
     else { r.style.removeProperty('--accent'); r.style.removeProperty('--on'); }
     var mark = $('#mark');                     // the logo follows the look (his ask, 14 Oct); Python draws it, see brand.py
@@ -3185,7 +3186,7 @@
     var body = '';
     if (st.set === 'look') {
       var acc = ACCENTS[s.look];
-      body = setrow('Look', 'Cartridge, Glass or Glass Dark', [['cartridge', 'Cartridge'], ['glass', 'Glass'], ['glassdark', 'Glass Dark']].map(function (l) {
+      body = setrow('Look', 'Cartridge, Glass, Glass Dark, Minimal or Minimal Dark', [['cartridge', 'Cartridge'], ['glass', 'Glass'], ['glassdark', 'Glass Dark'], ['minimal', 'Minimal'], ['minimaldark', 'Minimal Dark']].map(function (l) {
           return '<button type="button" class="chip" data-look="' + l[0] + '" aria-pressed="' + (s.look === l[0]) + '">' + l[1] + '</button>'; }).join('')) +
         setrow('Accent colour', 'Buttons, bars and highlights', '<div class="accents"><button type="button" class="own" data-acc="" aria-pressed="' + (!s.accent) + '">The look\'s own</button>' +
           acc.map(function (c) { return '<button type="button" style="background:' + c + '" data-acc="' + c + '" aria-pressed="' + (s.accent === c) + '" aria-label="Accent ' + c + '"></button>'; }).join('') + '</div>') +
